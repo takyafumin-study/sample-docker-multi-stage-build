@@ -1,11 +1,11 @@
 services:
 
   web:
-    image: multi-build-dev-web
+    image: multi-build-prod-web
     build:
       context: .
       dockerfile: ./.docker/nginx/Dockerfile
-      target: dev
+      target: prod
     init: true
     ports:
       - "127.0.0.1:80:80"
@@ -13,16 +13,12 @@ services:
       TZ: ${TZ}
       SERVER_NAME: localhost
       PHP_HOST: app
-    volumes:
-      - ./src/public:/var/www/src/public
 
   app:
-    image: multi-build-dev-app
+    image: multi-build-prod-app
     build:
       context: .
       dockerfile: ./.docker/php/Dockerfile
-      target: dev
+      target: prod
     environment:
       TZ: ${TZ}
-    volumes:
-      - ./src:/var/www/src

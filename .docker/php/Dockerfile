@@ -11,6 +11,8 @@ RUN set -eux \
     libzip-dev \
  && install-php-extensions bcmath exif opcache zip
 
+WORKDIR /var/www/src
+
 FROM builder as dev
 
 RUN set -eux \
@@ -22,3 +24,6 @@ RUN set -eux \
   && install-php-extensions xdebug
 
 FROM builder as prod
+
+COPY ./src /var/www/src
+RUN composer install

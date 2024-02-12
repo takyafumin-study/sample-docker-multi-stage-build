@@ -23,6 +23,9 @@ function display_help {
     echo "      artisan [sub-command]   Execute artisan command on App Container";
     echo "      tinker                  Execute php artisan tinekr on App Container";
     echo "";
+    echo "  build:";
+    echo "      build:prod              Build for Production";
+    echo "";
     echo "  others:";
     echo "      help                    Display command help";
     echo "";
@@ -69,6 +72,9 @@ elif [ "$1" == "artisan" ]; then
 
 elif [ "$1" == "tinker" ]; then
   docker compose exec app php artisan tinker
+
+elif [ "$1" = "build:prod" ]; then
+  docker compose -f compose.prod.yml build
 
 elif [ $# -ge 1 ]; then
   # 未指定のパラメータの場合、docker-copmoseコマンドをそのまま呼び出す
